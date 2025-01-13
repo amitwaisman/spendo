@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-4 sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand text-danger fw-bold" href="#">
+                <h3>Spendo</h3>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span> <!-- האיקון של ההמבורגר -->
+            </button>
+
+            <!-- התפריט עצמו -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/profile">Profile</a>
+                    </li>
+                </ul>
+                <button class="btn btn-danger border rounded-pill px-2 me-3" onclick="handleLoginClick()">Login</button>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="main mt-3">
+        <h1 class="text-danger">Hello User</h1>
+        <div class="budget-container row h-fit-content">
+            <div class="add-container col-4">
+                <div class="add-budget-container">
+
+                    <form>
+                        <label for="month-select">Select a month:</label>
+                        <input type="month" id="month-select" />
+                        <br>
+                        <div class="form-group">
+                            <label for="budget">
+                                <h4>Budget</h4>
+                            </label>
+                            <input class="form-control mt-2 mb-2 rounded-pill" type="number" required id="budget"
+                                placeholder="Enter budget..">
+                        </div>
+                        <button type="submit" class="btn form-control w-auto border rounded-pill btnU"
+                            id="budget-submit-btn">Add</button>
+                        <button class="btn btn-secendey form-control w-auto border rounded-pill btnU" id="clear-btn"
+                            disabled>Clear Budget</button>
+                    </form>
+                    <div id="budgetSummary" class="mt-3">
+                        <!-- תקציבים יתווספו כאן -->
+                    </div>
+                </div>
+
+                <div class="add-expense-container mt-4">
+
+                    <form>
+                        <div class="form-group">
+                            <label for="expense">
+                                <h4>Add Expense</h4>
+                            </label>
+                            <input class="form-control rounded-pill" type="text" id="expense" required
+                                placeholder="Enter expense title..">
+                            <input class="form-control mt-2 mb-2 rounded-pill" type="text" id="amount" required
+                                placeholder="Enter amount..">
+                            <label for="category">Category:</label>
+                            <select class="rounded-pill mt-2 mb-2" id="category">
+                                <option value="Food">Food</option>
+                                <option value="Transportation">Transportation</option>
+                                <option value="Housing">Housing</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <!-- אפשר להוסיף קטגוריות נוספות כאן -->
+                            </select>
+
+                        </div>
+                        <button type="submit" class="btn form-control w-auto border rounded-pill btnU"
+                            id="submit-btn">Add</button>
+
+                    </form>
+                </div>
+                <button class="btn btn-danger form-control mt-2 w-auto border rounded-pill" onclick="resetAll()">Reset
+                    All</button>
+
+                <hr>
+                <div class="container mt-5">
+                    <h3>Expenses by Category</h3>
+                    <canvas id="myCategoryChart"></canvas>
+                </div>
+            </div>
+
+            <div class="display-container col-8">
+                <div class="d-flex flex-nowrap justify-content-center align-items-center">
+                    <div class="card m-1 d-flex bg-dark text-white" style="flex: 1;">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Budget:</h5>
+                            <span class="card-text" id="totalBudget">100</span>
+                        </div>
+                    </div>
+                    <div class="card m-1 d-flex bg-dark text-white" style="flex: 1;">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Expenses:</h5>
+                            <span class="card-text" id="totalExpenses">100</span>
+                        </div>
+                    </div>
+                    <div class="card m-1 d-flex bg-dark text-white" style="flex: 1;">
+                        <div class="card-body">
+                            <h5 class="card-title">Budget Left:</h5>
+                            <span class="card-text" id="budgetLeft">100</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h1>Selected Month: <span class="text-danger" id="selected-month">January</span></h1>
+                <hr>
+                <div class="table-container table-responsive">
+                    <h5>Expense History:</h5>
+                    <!-- DataTable -->
+                    <table id="expenseTable" class="table table-striped hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Expense Name</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- More rows can be added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap and DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="./js/script.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            $('#expenseTable').DataTable();
+        });
+    </script>
+</body>
+
+</html>

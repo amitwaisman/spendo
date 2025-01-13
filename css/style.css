@@ -7,7 +7,7 @@
 }
 
 body {
-    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    background-image: linear-gradient(120deg, #f0f6ff 0%, #dcdfdf 100%);
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -18,18 +18,28 @@ body {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    
 }
 
-.main > h1 {
-    color: rgb(100, 100, 100);
-    font-weight: bold;
-    text-shadow: 1px 1px rgb(255, 255, 255);
-    font-size: 55px;
+.btnU {
+    background-color: black; /* צבע רקע שחור */
+    color: white; /* צבע טקסט לבן */
+    border: none; /* ביטול גבול */
+    border-radius: 5px; /* פינות מעוגלות */
+    cursor: pointer; /* הופך את הסמן ליד */
+    font-size: 16px; /* גודל פונט */
 }
+
+.btnU:hover {
+    background-color: white; /* צבע רקע לבן בעת hover */
+    color: black; /* צבע טקסט שחור בעת hover */
+    border: 5px solid black; /* גבול שחור בעת hover */
+}
+
+
 
 .budget-container {
-    height: 85%;
+    height: fit-content; /* יתאים את הגובה לתוכן */
     width: 85%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 20px;
