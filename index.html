@@ -13,20 +13,28 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fs-4 position-sticky w-100">
+     <!-- Navigation Bar -->
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-4 sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand text-danger fw-bold" href="#">Spendo</a>
-            <div class="collapse navbar-collapse">
+            <a class="navbar-brand text-danger fw-bold" href="#">
+                <h3>Spendo</h3>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span> <!-- האיקון של ההמבורגר -->
+            </button>
+
+            <!-- התפריט עצמו -->
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/" >Home</a>
+                        <a class="nav-link  active" href="./index.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./profile.html">Profile</a>
+                        <a class="nav-link" href="/profile">Profile</a>
                     </li>
                 </ul>
                 <button class="btn btn-danger border rounded-pill px-2 me-3" onclick="handleLoginClick()">Login</button>
@@ -35,72 +43,43 @@
     </nav>
     
     <div class="main">
-        <h1>Budget Tracker System</h1>
-        <div class="budget-container row">
-            <div class="add-container col-4">
-                <div class="add-budget-container">
-                    <h4>Add Budget</h4>
-                    <form>
-                        <div class="form-group">
-                            <label for="budget">Budget:</label>
-                            <input class="form-control" type="text" id="budget">
-                        </div>
-                            <button class="btn btn-primary form-control">Add Budget</button>
-                    </form>
-                </div>
-                <div class="add-expense-container mt-4">
-                    <h4>Add Expense</h4>
-                    <form>
-                        <div class="form-group">
-                            <label for="expense">Expense Title:</label>
-                            <input class="form-control" type="text" id="expense">
-                        </div>
-                        <div class="form-group">
-                            <label for="amount">Amount:</label>
-                            <input class="form-control" type="text" id="amount">
-                        </div>
-                        <button class="btn btn-primary form-control">Add Expense</button>
-                    </form>
-                </div>
-                <button class="btn btn-danger form-control mt-2" onclick="resetAll()">Reset All</button>
-
+        <div class='center-content'>
+            <h1 class='fw-bold text-danger d-flex justify-content-center display-1'>
+                Welcome to Spendo
+            </h1>
+            <p class="lead text-muted">Track your spending, set budgets, and save money effortlessly.</p>
+          </div>
+          <hr
+          class="mb-4 mt-5 d-inline-block mx-auto"
+          style="width: 80%; background-color: #9c1717; height: 2px"
+          />
+          <div class="row text-center mt-5">
+            <div class="col-md-4">
+                <h3>Track Expenses</h3>
+                <p>Stay on top of your spending with ease.</p>
             </div>
-
-            <div class="display-container col-8">
-                <div class="heading row" style="display: flex; justify-content: space-around;">
-                    <div class="alert alert-primary" role="alert">
-                        Total Budget: <span id="totalBudget">100</span>
-                    </div>
-                    <div class="alert alert-primary" role="alert">
-                        Total Expenses: <span id="totalExpenses">100</span>
-                    </div>
-                    <div class="alert alert-primary" role="alert">
-                        Budget Left: <span id="budgetLeft">100</span>
-                    </div>
-                </div>
-                <hr>
-                <div class="table-container table-responsive">
-                    <h5>Expense History:</h5>
-                    <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col">Expense Name</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-
-                          </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="col-md-4">
+                <h3>Set Budgets</h3>
+                <p>Create personalized budgets to save more.</p>
             </div>
-
+            <div class="col-md-4">
+                <h3>Easy to Use</h3>
+                <p>Simple, intuitive interface for effortless management.</p>
+            </div>
+            
         </div>
 
+        <div class="row text-center  mt-5">
+            <div class="col-md-12">
+                
+                <button class="btn btn-danger rounded-pill border border-2">Start now</button>
+            </div>
+        </div>
+        
+
     </div>
+    
+    
 
     <!-- Bootstrap JS -->
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
