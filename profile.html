@@ -29,7 +29,7 @@
                 <span class="navbar-toggler-icon"></span> <!-- האיקון של ההמבורגר -->
             </button>
 
-           
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
@@ -42,7 +42,7 @@
                         <a class="nav-link active" href="/profile">Profile</a>
                     </li>
                 </ul>
-                <button class="btn btn-outline-danger border rounded-pill px-2 me-3" >Edit Profile</button>
+                <button class="btn btn-outline-danger border rounded-pill px-2 me-3">Edit Profile</button>
                 <button class="btn btn-danger border rounded-pill px-2 me-3" onclick="handleLoginClick()">Login</button>
             </div>
         </div>
@@ -55,9 +55,12 @@
             <div class="add-container col-2">
                 <div class="add-budget-container">
 
-                    <form>
-                        <h4 for="month-select">Select a month:</h4>
-                        <input class="form-control mt-2 mb-2 rounded-pill" type="month" id="month-select" />
+                    <form class="needs-validation" novalidate>
+                        <div class="form-group">
+                            <h4 for="month-select">Select a month:</h4>
+                            <input class="form-control mt-2 mb-2 rounded-pill" type="month" id="month-select" />
+                            <div class="invalid-feedback">Enter Month.</div>
+                        </div>
                         <br>
                         <div class="form-group">
                             <label for="budget">
@@ -65,6 +68,7 @@
                             </label>
                             <input class="form-control mt-2 mb-2 rounded-pill" type="number" required id="budget"
                                 placeholder="Enter budget..">
+                            <div class="invalid-feedback" >Enter budget.</div>
                         </div>
                         <button type="submit" class="btn form-control w-auto border rounded-pill btnU"
                             id="budget-submit-btn">Add</button>
@@ -76,15 +80,29 @@
 
                 <div class="add-expense-container mt-4">
 
-                    <form>
+                    <form class="needs-validation" novalidate>
                         <div class="form-group">
                             <label for="expense">
-                                <h4>Add Expense</h4>
+                                <h4>Add expense</h4>
                             </label>
-                            <input class="form-control rounded-pill" type="text" id="expense" required
-                                placeholder="Enter expense title..">
-                            <input class="form-control mt-2 mb-2 rounded-pill" type="text" id="amount" required
-                                placeholder="Enter amount..">
+                            <input class="form-control rounded-pill" type="text" id="expense"
+                                placeholder="Enter expense title.." required>
+                            <div class="invalid-feedback">
+                                Please enter exspense title.
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">
+                                <h4>Add amount</h4>
+                            </label>
+                            <input class="form-control mt-2 mb-2 rounded-pill" type="text" id="amount"
+                                placeholder="Enter amount.." required>
+                            <div class="invalid-feedback">
+                                Please enter a valid amount or add budeget first.
+                            </div>
+                        </div>
+                        <div>
                             <label for="category">Category:</label>
                             <select class="rounded-pill mt-2 mb-2" id="category">
                                 <option value="Food">Food</option>
@@ -95,6 +113,7 @@
                             </select>
 
                         </div>
+
                         <button type="submit" class="btn form-control w-auto border rounded-pill btnU"
                             id="submit-btn">Add</button>
 
@@ -103,7 +122,7 @@
                 <button class="btn btn-danger form-control mt-2 w-auto border rounded-pill" onclick="resetAll()">Reset
                     All</button>
 
-                
+
 
             </div>
 

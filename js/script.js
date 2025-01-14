@@ -54,8 +54,8 @@ function updateUI() {
         }
     });
 
-   
-    
+
+
 
     // Update the expenses table
     let table = $('#expenseTable').DataTable();
@@ -124,74 +124,119 @@ document.addEventListener("DOMContentLoaded", function () {
     // Update UI with initial data
     updateUI();
 
-    $('#hello').text(function(index, currentText) {
+    $('#hello').text(function (index, currentText) {
         return currentText + userId;
     });
 
     // Add budget
-    document.getElementById('budget-submit-btn').addEventListener('click', function () {
+
+    document.getElementById('budget-submit-btn').addEventListener('click', function (event) {
+        event.preventDefault();
+
+
+        var isValid = true;
+
+        // מאמת את שדה שם ההוצאה
+        let monthSelected = document.getElementById('month-select');
+        if (monthSelected.value.trim() === '') {
+            monthSelected.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            monthSelected.classList.remove('is-invalid');
+            monthSelected.setCustomValidity(""); // Clear custom validity
+        }
+
+        // מאמת את שדה הסכום
         let budgetInput = document.getElementById('budget');
-        let budgetAmount = parseFloat(budgetInput.value.trim());
-
-        if (isNaN(budgetAmount) || budgetAmount <= 0) {
-            alert('Please enter a valid budget amount.');
-            return;
+        if (isNaN(budgetInput.value) || budgetInput.value <= 0) {
+            budgetInput.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            budgetInput.classList.remove('is-invalid');
         }
 
-        if (selectedMonth == "") {
-            alert('Please choose a month.');
-            return;
+        if (isValid) {
+
+
+            let budgetAmount = parseFloat(budgetInput.value.trim());
+            // Update the budget for the selected month
+            budgetData.totalBudget += budgetAmount;
+            budgetData.budgetLeft += budgetAmount;
+
+            // Save to localStorage for the selected month and user
+            updateLocalStorage();
+            updateUI(); // Update the UI
+            budgetInput.value = '';
         }
-
-        // Update the budget for the selected month
-        budgetData.totalBudget += budgetAmount;
-        budgetData.budgetLeft += budgetAmount;
-
-        // Save to localStorage for the selected month and user
-        updateLocalStorage();
-        updateUI(); // Update the UI
-        budgetInput.value = '';
+        else {
+           return;
+        }
     });
 
     // Add expense
-    document.getElementById('submit-btn').addEventListener('click', function () {
-        let expenseInput = document.getElementById('expense');
-        let amountInput = document.getElementById('amount');
-        let categoryInput = document.getElementById('category');
+    document.getElementById('submit-btn').addEventListener('click', function (event) {
+        event.preventDefault();
 
-        let expenseTitle = expenseInput.value.trim();
-        let expenseAmount = parseFloat(amountInput.value.trim());
-        let expenseCategory = categoryInput.value;
+        // דגלים לכל שדה
+        var isValid = true;
 
-        if (expenseTitle === '' || isNaN(expenseAmount) || expenseAmount <= 0) {
-            alert('Please enter a valid expense');
-            return;
+        // מאמת את שדה שם ההוצאה
+        let expenseTitle = document.getElementById('expense');
+        if (expenseTitle.value.trim() === '') {
+            expenseTitle.classList.add('is-invalid');
+            isValid = false;
+        } else if (/^\d/.test(expenseTitle.value.trim())) {
+            expenseTitle.classList.add('is-invalid');
+            expenseTitle.setCustomValidity("Expense title cannot start with a number.");
+            isValid = false;
+        } else {
+            expenseTitle.classList.remove('is-invalid');
+            expenseTitle.setCustomValidity(""); // Clear custom validity
         }
 
-        if (budgetData.budgetLeft < expenseAmount || budgetData.totalBudget === 0) {
-            alert('Expense must be less than the budget left');
-            return;
+        // מאמת את שדה הסכום
+        let amount = document.getElementById('amount');
+        if (isNaN(amount.value) || amount.value <= 0 || amount.value > budgetData.budgetLeft) {
+            amount.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            amount.classList.remove('is-invalid');
         }
 
-        // Update the expenses for the selected month
-        budgetData.expenses.push({
-            title: expenseTitle,
-            amount: expenseAmount,
-            category: expenseCategory
-        });
+        // אם כל השדות תקינים, הוסף את ההוצאה
+        if (isValid) {
+            let expenseInput = document.getElementById('expense');
+            let amountInput = document.getElementById('amount');
+            let categoryInput = document.getElementById('category');
 
-        // Update total budget and remaining budget
-        budgetData.totalExpenses += expenseAmount;
-        budgetData.budgetLeft -= expenseAmount;
+            let expenseTitle = expenseInput.value.trim();
+            let expenseAmount = parseFloat(amountInput.value.trim());
+            let expenseCategory = categoryInput.value;
 
-        // Save to localStorage for the selected month and user
-        updateLocalStorage();
-        updateUI(); // Update the UI
+            // עדכון ההוצאות עבור החודש הנבחר
+            budgetData.expenses.push({
+                title: expenseTitle,
+                amount: expenseAmount,
+                category: expenseCategory
+            });
 
-        // Reset input fields
-        expenseInput.value = '';
-        amountInput.value = '';
+            // עדכון התקציב הכולל והתקציב הנותר
+            budgetData.totalExpenses += expenseAmount;
+            budgetData.budgetLeft -= expenseAmount;
+
+            // שמירה ב-localStorage
+            updateLocalStorage();
+            updateUI(); // עדכון ה-UI
+
+            // אפס את השדות לאחר הוספת ההוצאה
+            expenseInput.value = '';
+            amountInput.value = '';
+        } else {
+            // הצגת הודעה אם לא כל השדות תקינים
+            return;
+        }
     });
+
 
     // Change selected month
     document.getElementById('month-select').addEventListener('change', function () {
@@ -217,6 +262,8 @@ document.addEventListener("DOMContentLoaded", function () {
         // Update the information on the screen with the selected month
         updateUI();
     });
+
+
 
     console.log(myCategoryChart);
 });
