@@ -29,7 +29,7 @@
                 <span class="navbar-toggler-icon"></span> <!-- האיקון של ההמבורגר -->
             </button>
 
-            <!-- התפריט עצמו -->
+           
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
@@ -42,6 +42,7 @@
                         <a class="nav-link active" href="/profile">Profile</a>
                     </li>
                 </ul>
+                <button class="btn btn-outline-danger border rounded-pill px-2 me-3" >Edit Profile</button>
                 <button class="btn btn-danger border rounded-pill px-2 me-3" onclick="handleLoginClick()">Login</button>
             </div>
         </div>
@@ -49,9 +50,9 @@
 
 
     <div class="main mt-3">
-        <h1 class="text-danger">Hello User</h1>
+        <h1 class="text-danger" id="hello">Hello </h1>
         <div class="budget-container row h-fit-content">
-            <div class="add-container col-4">
+            <div class="add-container col-2">
                 <div class="add-budget-container">
 
                     <form>
@@ -102,11 +103,8 @@
                 <button class="btn btn-danger form-control mt-2 w-auto border rounded-pill" onclick="resetAll()">Reset
                     All</button>
 
-                <hr>
-                <div class="container mt-5">
-                    <h3>Expenses by Category</h3>
-                    <canvas id="myCategoryChart"></canvas>
-                </div>
+                
+
             </div>
 
             <div class="display-container col-8">
@@ -131,7 +129,7 @@
                     </div>
                 </div>
                 <hr>
-                <h1>Selected Month: <span class="text-danger" id="selected-month">January</span></h1>
+                <h1>Selected Month: <span class="text-danger" id="selected-month"></span></h1>
                 <hr>
                 <div class="table-container table-responsive">
                     <h5>Expense History:</h5>
@@ -150,6 +148,10 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="container align-items-center col-2">
+                <h3>Expenses by Category</h3>
+                <canvas id="myCategoryChart"></canvas>
             </div>
 
 

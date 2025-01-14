@@ -1,8 +1,9 @@
-let selectedMonth = ''; // תוכל לשנות את ברירת המחדל לראשון
-// Check if there is any data in localStorage
-// פונקציה לטעינת הנתונים עבור החודש הנבחר
-function loadDataForMonth(month) {
-    return JSON.parse(localStorage.getItem(month)) || {
+let selectedMonth = ''; // You can change the default to the first one
+let userId = 'Maya'; // Assume this is the unique identifier for the user
+
+// Function to load data for the selected month and user
+function loadDataForMonth(month, userId) {
+    return JSON.parse(localStorage.getItem(`${userId}-${month}`)) || {
         totalBudget: 0,
         totalExpenses: 0,
         budgetLeft: 0,
@@ -10,18 +11,19 @@ function loadDataForMonth(month) {
     };
 }
 
-// טוען את הנתונים עבור החודש הנבחר
-let budgetData = loadDataForMonth(selectedMonth);
+// Load data for the selected month and user
+let budgetData = loadDataForMonth(selectedMonth, userId);
+
 // Function to update UI
-var myCategoryChart; // מגדירים את הגרף בשדה גלובלי
+var myCategoryChart;
 
 function updateUI() {
-    // עדכון המידע בטקסטים
+    // Update the information in the text
     document.getElementById('totalBudget').textContent = budgetData.totalBudget.toFixed(2);
     document.getElementById('totalExpenses').textContent = budgetData.totalExpenses.toFixed(2);
     document.getElementById('budgetLeft').textContent = budgetData.budgetLeft.toFixed(2);
 
-    // יצירת גרף מחדש
+    // Recreate the chart
     var ctx = document.getElementById('myCategoryChart').getContext('2d');
     if (myCategoryChart) {
         myCategoryChart.destroy();
@@ -52,7 +54,10 @@ function updateUI() {
         }
     });
 
-    // עדכון טבלת ההוצאות
+   
+    
+
+    // Update the expenses table
     let table = $('#expenseTable').DataTable();
     table.clear();
 
@@ -65,11 +70,8 @@ function updateUI() {
         ]);
     });
 
-
     table.draw();
 }
-
-
 
 // Function to remove an expense
 function removeExpense(expenseTitle) {
@@ -79,7 +81,7 @@ function removeExpense(expenseTitle) {
         budgetData.totalExpenses -= removedExpense.amount;
         budgetData.budgetLeft += removedExpense.amount;
 
-        // עדכון ה-DataTable
+        // Update the DataTable
         let table = $('#expenseTable').DataTable();
 
         // Clear and add new rows to the table
@@ -101,10 +103,9 @@ function removeExpense(expenseTitle) {
     }
 }
 
-
-// פונקציה לעדכון ה-`localStorage` עבור החודש הנבחר
+// Function to update the `localStorage` for the selected month and user
 function updateLocalStorage() {
-    localStorage.setItem(selectedMonth, JSON.stringify(budgetData));
+    localStorage.setItem(`${userId}-${selectedMonth}`, JSON.stringify(budgetData));
 }
 
 function resetAll() {
@@ -123,7 +124,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Update UI with initial data
     updateUI();
 
-    // הוספת תקציב
+    $('#hello').text(function(index, currentText) {
+        return currentText + userId;
+    });
+
+    // Add budget
     document.getElementById('budget-submit-btn').addEventListener('click', function () {
         let budgetInput = document.getElementById('budget');
         let budgetAmount = parseFloat(budgetInput.value.trim());
@@ -138,17 +143,17 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // עדכון התקציב עבור החודש הנבחר
+        // Update the budget for the selected month
         budgetData.totalBudget += budgetAmount;
         budgetData.budgetLeft += budgetAmount;
 
-        // שמירה ב-localStorage עבור החודש הנבחר
+        // Save to localStorage for the selected month and user
         updateLocalStorage();
-        updateUI(); // עדכון הממשק
+        updateUI(); // Update the UI
         budgetInput.value = '';
     });
 
-    // הוספת הוצאה
+    // Add expense
     document.getElementById('submit-btn').addEventListener('click', function () {
         let expenseInput = document.getElementById('expense');
         let amountInput = document.getElementById('amount');
@@ -168,71 +173,50 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // עדכון ההוצאות עבור החודש הנבחר
+        // Update the expenses for the selected month
         budgetData.expenses.push({
             title: expenseTitle,
             amount: expenseAmount,
             category: expenseCategory
         });
 
-        // עדכון התקציב הכולל והתקציב שנותר
+        // Update total budget and remaining budget
         budgetData.totalExpenses += expenseAmount;
         budgetData.budgetLeft -= expenseAmount;
 
-        // שמירה ב-localStorage עבור החודש הנבחר
+        // Save to localStorage for the selected month and user
         updateLocalStorage();
-        updateUI(); // עדכון הממשק
+        updateUI(); // Update the UI
 
-        // איפוס שדות הקלט
+        // Reset input fields
         expenseInput.value = '';
         amountInput.value = '';
     });
 
-
-
-    // שינוי חודש שנבחר
+    // Change selected month
     document.getElementById('month-select').addEventListener('change', function () {
-        // הערך שמתקבל הוא בפורמט YYYY-MM, לדוג' "2025-01"
-        selectedMonth = this.value; // החודש שנבחר
+        // The value received is in the format YYYY-MM, e.g., "2025-01"
+        selectedMonth = this.value; // The selected month
 
         console.log(selectedMonth);
 
-        // חילוץ החודש מהתאריך (YY-MM)
-        let [year, month] = selectedMonth.split('-');  // מחלק את הערך לשנה וחודש
+        // Extract the month from the date (YY-MM)
+        let [year, month] = selectedMonth.split('-');  // Split the value into year and month
         let monthNames = [
             "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ];
-        let monthName = monthNames[parseInt(month) - 1];  // ממיר את המספר לשם החודש
+        let monthName = monthNames[parseInt(month) - 1];  // Convert the number to the month's name
 
-        // עדכון ה-UI עם שם החודש שנבחר
+        // Update the UI with the selected month's name
         document.getElementById('selected-month').textContent = `${monthName} ${year}`;
 
-        // טוען את הנתונים עבור החודש הנבחר מ-localStorage
-        budgetData = loadDataForMonth(selectedMonth);
+        // Load data for the selected month from localStorage
+        budgetData = loadDataForMonth(selectedMonth, userId);
 
-        // עדכון המידע במסך עם החודש הנבחר
-        updateUI();
-    });
-
-    $("#clear-btn").click(function () {
-        // איפוס הערכים בשדות הקלט (inputs)
-        document.getElementById('budget').value = ''; // איפוס שדה התקציב
-        document.getElementById('expense').value = ''; // איפוס שם ההוצאה
-        document.getElementById('amount').value = ''; // איפוס הסכום
-        document.getElementById('category').value = ''; // איפוס הקטגוריה
-
-        // איפוס ערכים נוספים כמו תקציב סך הכל, הוצאות סך הכל ותקציב שנותר
-        budgetData.totalBudget = 0;
-        budgetData.totalExpenses = 0;
-        budgetData.budgetLeft = 0;
-
-        // עדכון המידע ב-localStorage וב-UI
-        updateLocalStorage();
+        // Update the information on the screen with the selected month
         updateUI();
     });
 
     console.log(myCategoryChart);
-
-
 });
