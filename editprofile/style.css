@@ -55,12 +55,13 @@ input[type="file"] {
     border: none; /* מסיר את המסגרת */
     outline: none; /* מסיר מסגרת פוקוס בדפדפנים */
     background: none; /* מסיר רקע */
-    color: #a36fc3; /* צבע טקסט */
+    color: #dc3545; /* צבע טקסט */
     cursor: pointer; /* משנה את סמן העכבר */
 }
 
 input[type="file"]::-webkit-file-upload-button {
-    background: #8135b1; /* צבע כפתור העלאת קובץ */
+    border-radius: 50rem !important;
+    background: #dc3545; /* צבע כפתור העלאת קובץ */
     color: white; /* צבע טקסט */
     border: none; /* מסיר מסגרת */
     border-radius: 5px; /* פינות מעוגלות */

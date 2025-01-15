@@ -4,16 +4,7 @@
     box-sizing: border-box;
 }
 
-body {
-    background: #f6f5f7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-family: 'Montserrat', sans-serif;
-    height: 100vh;
-    margin: -20px 0 50px;
-}
+
 
 h1 {
     font-weight: bold;
@@ -32,42 +23,8 @@ p {
     margin: 20px 0 30px;
 }
 
-span {
-    font-size: 12px;
-}
 
-a {
-    color: #333;
-    font-size: 14px;
-    text-decoration: none;
-    margin: 15px 0;
-}
 
-button {
-    border-radius: 20px;
-    border: 1px solid #8135b1;
-    background-color: #8135b1;
-    color: #FFFFFF;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-button:focus {
-    outline: none;
-}
-
-button.ghost {
-    background-color: transparent;
-    border-color: #FFFFFF;
-}
 
 form {
     background-color: #FFFFFF;
@@ -95,9 +52,10 @@ input {
                 0 10px 10px rgba(0,0,0,0.22);
     position: relative;
     overflow: hidden;
-    width: 768px;
+    width: 50%;
     max-width: 100%;
     min-height: 480px;
+    margin-top: 40px;
 }
 
 .form-container {
@@ -158,9 +116,9 @@ input {
 }
 
 .overlay {
-    background: #8135b1;
-    background: -webkit-linear-gradient(to right, #8135b1, #8135b1);
-    background: linear-gradient(to right, #8135b1, #8135b1);
+    background: #b42424;
+    background: -webkit-linear-gradient(to right, #b42424, #b42424);
+    background: linear-gradient(to right, #b42424, #b42424);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;

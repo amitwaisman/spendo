@@ -120,6 +120,10 @@ function resetAll() {
     updateUI();
 }
 
+function handleLoginClick(){
+    window.location.href = './login/login.html';
+};
+
 document.addEventListener("DOMContentLoaded", function () {
     // Update UI with initial data
     updateUI();
@@ -130,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Add budget
 
-    document.getElementById('budget-submit-btn').addEventListener('click', function (event) {
+    $('#budget-submit-btn').on('click', function (event) {
         event.preventDefault();
 
 
@@ -174,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Add expense
-    document.getElementById('submit-btn').addEventListener('click', function (event) {
+    $('#submit-btn').on('click', function (event) {
         event.preventDefault();
 
         // דגלים לכל שדה
@@ -239,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Change selected month
-    document.getElementById('month-select').addEventListener('change', function () {
+    $('#month-select').on('change', function () {
         // The value received is in the format YYYY-MM, e.g., "2025-01"
         selectedMonth = this.value; // The selected month
 
@@ -266,4 +270,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     console.log(myCategoryChart);
+
+    
 });
