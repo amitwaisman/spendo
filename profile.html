@@ -43,7 +43,8 @@
                     </li>
                 </ul>
                 <button class="btn btn-outline-danger border rounded-pill px-2 me-3">Edit Profile</button>
-                
+                <!-- Sign Out button, visible when user is logged in -->
+                <button id="signOutButton" class="btn btn-danger" style="display: none;">Sign Out</button>
             </div>
         </div>
     </nav>
@@ -52,7 +53,7 @@
     <div class="main mt-3">
         <h1 class="text-danger" id="hello">Hello </h1>
         <div class="budget-container row h-fit-content">
-            <div class="add-container col-2">
+            <div class="add-container col-3">
                 <div class="add-budget-container">
 
                     <form class="needs-validation" novalidate>
@@ -126,8 +127,8 @@
 
             </div>
 
-            <div class="display-container col-8">
-                <div class="d-flex flex-nowrap justify-content-center align-items-center">
+            <div class="display-container col-6">
+                <div class="d-flex flex-nowrap justify-content-center">
                     <div class="card m-1 d-flex bg-dark text-white" style="flex: 1;">
                         <div class="card-body">
                             <h5 class="card-title">Total Budget:</h5>
@@ -148,7 +149,7 @@
                     </div>
                 </div>
                 <hr>
-                <h1>Selected Month: <span class="text-danger" id="selected-month"></span></h1>
+                <h3>Selected Month: <span class="text-danger" id="selected-month"></span></h3>
                 <hr>
                 <div class="table-container table-responsive">
                     <h5>Expense History:</h5>
@@ -168,14 +169,15 @@
                     </table>
                 </div>
             </div>
-            <div class="container align-items-center col-2">
-                <h3>Expenses by Category</h3>
+            <div class="container align-items-center col-3">
+                <h4>Expenses by Category</h4>
                 <canvas id="myCategoryChart"></canvas>
             </div>
 
 
 
         </div>
+        <br>
 
     </div>
 
@@ -186,13 +188,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="./js/script.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            // Initialize DataTable
-            $('#expenseTable').DataTable();
-        });
-    </script>
 </body>
 
 </html>

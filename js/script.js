@@ -66,7 +66,7 @@ function updateUI() {
             expense.title,
             expense.amount.toFixed(2),
             expense.category,
-            `<button class="btn btn-sm btn-danger" onclick="removeExpense('${expense.title}')">Remove</button>`
+            `<button class="btn btn-sm btn-danger rounded-pill" onclick="removeExpense('${expense.title}')">Remove</button>`
         ]);
     });
 
@@ -121,12 +121,16 @@ function resetAll() {
 }
 
 function handleLoginClick(){
-    window.location.href = './login/login.html';
+    window.location.href = './login.html';
 };
 
 document.addEventListener("DOMContentLoaded", function () {
+
+    
     // Update UI with initial data
     updateUI();
+
+    $('#expenseTable').DataTable();
 
     $('#hello').text(function (index, currentText) {
         return currentText + userId;

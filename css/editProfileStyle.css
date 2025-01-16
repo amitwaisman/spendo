@@ -1,0 +1,141 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f4f7f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 50px auto;
+    max-width: 900px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+hr {
+    border: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.col-md-3 {
+    text-align: center;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 15px 0;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+h6 {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+input[type="file"] {
+    margin-top: 10px;
+    font-size: 14px;
+    border: none; /* מסיר את המסגרת */
+    outline: none; /* מסיר מסגרת פוקוס בדפדפנים */
+    background: none; /* מסיר רקע */
+    color: #dc3545; /* צבע טקסט */
+    cursor: pointer; /* משנה את סמן העכבר */
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    border-radius: 50rem !important;
+    background: #dc3545; /* צבע כפתור העלאת קובץ */
+    color: white; /* צבע טקסט */
+    border: none; /* מסיר מסגרת */
+    border-radius: 5px; /* פינות מעוגלות */
+    padding: 10px 15px; /* ריווח פנימי */
+    cursor: pointer; /* משנה את סמן העכבר */
+    transition: background-color 0.3s ease; /* אפקט מעבר */
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background: #722d9d; /* צבע חדש במעבר עכבר */
+}
+
+input[type="file"]::-webkit-file-upload-button:active {
+    background: #722d9d; /* צבע לחיצה */
+}
+
+.personal-info {
+    flex: 1;
+}
+
+.alert {
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    background-color: #f0e9f5;
+    border-left: 4px solid #8135b1;
+    color: #333;
+    border-radius: 5px;
+}
+
+.alert i {
+    margin-right: 5px;
+}
+
+.form-horizontal .form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.btn {
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #8135b1;
+    color: #fff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #722d9d;
+}
+
+.btn-default {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.btn-default:hover {
+    background-color: #e0e0e0;
+}

@@ -43,11 +43,11 @@ body {
 
 .budget-container {
     height: fit-content; /* יתאים את הגובה לתוכן */
-    width: 85%;
+    width: 90%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 20px;
     background-color: rgba(255, 255, 255, 0.6);
-    padding: 40px;
+    padding: 10px;
 }
 
 .add-budget-container, .add-expense-container {
@@ -62,5 +62,4 @@ body {
     padding: 20px;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.5);
-    width: 65%;
 }
