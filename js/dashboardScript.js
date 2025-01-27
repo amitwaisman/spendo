@@ -370,6 +370,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Handle expense submission
     $('#submit-btn').on('click', function (event) {
         event.preventDefault();
+        const button = this;
+       
 
         const budgetLeft = budgetData.budget_details.BudgetLeft;
         const expenseInput = document.getElementById('expense');
@@ -416,7 +418,8 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             
         
-            
+        
+        button.disabled = true;     
         
 
         const newExpense = {
