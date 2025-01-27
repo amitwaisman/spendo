@@ -61,7 +61,7 @@ Admin users have access to an admin panel where they can manage user data, inclu
 
 ### Admin Features
 - **Admin Panel**: View all registered users.
-- **Delete User Data**: Admins can delete user data from DynamoDB.
+- **Delete User Data**: Admins can delete user data from DynamoDB and Cognito User Pool.
 
 ### Visualizations
 - **Budget Summary**: Displays total budget, expenses, and remaining balance.
