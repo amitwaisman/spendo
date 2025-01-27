@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-4 sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand text-danger fw-bold" href="#">
+                <h3>Spendo</h3>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a id="profileLink" class="nav-link" href="./dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item" id="adminNavLink" style="display: none;">
+                        <a class="nav-link" href="./admin.html">Admin</a>
+                    </li>
+                </ul>
+<!--                <a id="editProfileButton" href="./editprofile.html" class="btn btn-danger rounded-pill px-2 me-3">Edit Profile</a> -->
+                <button id="signOutButton" class="btn btn-danger rounded-pill">Log out <i class="bi bi-box-arrow-right" style="font-size:17px"></i></button>
+            </div>
+            
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1>Admin Panel</h1>
+        <hr>
+        <div class="user-container">
+            <!-- Dynamically generated user tiles -->
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/admin.js"></script>
+    <script src="./js/sharedNavBar.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker System</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fs-4 sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand text-danger fw-bold" href="#">
+                <h3>Spendo</h3>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a id="profileLink" class="nav-link" href="./dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item" id="adminNavLink" style="display: none;">
+                        <a class="nav-link" href="./admin.html">Admin</a>
+                    </li>
+                </ul>
+<!--                <a id="editProfileButton" href="./editprofile.html" class="btn btn-danger rounded-pill px-2 me-3">Edit Profile</a> -->
+                <button id="signOutButton" class="btn btn-danger rounded-pill">Log out <i class="bi bi-box-arrow-right" style="font-size:17px"></i></button>
+            </div>
+            
+    </nav>
+
+
+    <div class="main mt-3">
+        <div id="loading" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);z-index: 9999;">
+                 <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        <h1 class="text-danger" id="hello">Hello <span id="user-name"></span></h1>
+        <div class="budget-container row h-fit-content">
+            
+            <div class="add-container col-3">
+                <div class="add-budget-container">
+
+                    <form id="budgetForm" class="needs-validation" novalidate>
+                        <div class="form-group">
+                            <label for="month">
+                            <h4 for="month-select">Select a month:</h4>
+                            </label>
+
+                            <input class="form-control mt-2 mb-2 rounded-pill" type="month" id="month-select" />
+                            <div class="invalid-feedback">Enter Month.</div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="budget">
+                                <h4>Budget</h4>
+                            </label>
+                            <input class="form-control mt-2 mb-2 rounded-pill" type="number" required id="budget"
+                                placeholder="Enter budget..">
+                            <div class="invalid-feedback" >Enter budget.</div>
+                        </div>
+                        <button type="submit" class="btn form-control w-auto border rounded-pill btnU"
+                            id="budget-submit-btn">Add Budget</button>
+                    </form>
+                </div>
+
+                <div class="add-expense-container mt-4">
+
+                    <form class="needs-validation" novalidate>
+                        <div class="form-group">
+                            <label for="expense">
+                                <h4>Add expense</h4>
+                            </label>
+                            <input class="form-control rounded-pill" type="text" id="expense"
+                                placeholder="Enter expense title.." required maxlength="18">
+                            <div class="invalid-feedback">
+                                Please enter exspense title.
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="amount">
+                                <h4>Add amount</h4>
+                            </label>
+                            <input class="form-control mt-2 mb-2 rounded-pill" type="number" id="amount"
+                                placeholder="Enter amount.." required>
+                            <div class="invalid-feedback">
+                                Please enter a valid amount or add budeget first.
+                            </div>
+                        </div>
+                        <div>
+                            <label for="category" class="form-label"><h4>Category:</h4></label>
+                            <select class="form-select rounded-pill mt-2 mb-2" id="category">
+                                <option disabled selected value="" >Choose category..</option>
+                                <option value="Food">Food</option>
+                                <option value="Transportation">Transportation</option>
+                                <option value="Housing">Housing</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <!-- אפשר להוסיף קטגוריות נוספות כאן -->
+                            </select>
+
+                        </div>
+
+                        <button type="submit" class="btn form-control w-auto border rounded-pill btnU"
+                            id="submit-btn" disabled>Add</button>
+
+                    </form>
+                </div>
+                <button id="resetBudgetBtn" class="btn   btn-danger form-control mt-2 w-auto border rounded-pill">Reset Budget</button>
+
+
+
+            </div>
+    
+            <div class="display-container col-6">
+                <hr>
+                <h3>Selected Month: <span class="text-danger" id="selected-month"></span></h3>
+                <hr>
+                <div class="d-flex flex-nowrap justify-content-center">
+                    <div class="card m-1 d-flex bg-dark text-white" style="flex: 1;">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Budget:</h5>
+                            <span class="card-text" id="totalBudget">100</span>
+                        </div>
+                    </div>
+                    <div class="card m-1 d-flex bg-dark text-white" style="flex: 1;">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Expenses:</h5>
+                            <span class="card-text" id="totalExpenses">100</span>
+                        </div>
+                    </div>
+                    <div class="card m-1 d-flex bg-dark text-white" style="flex: 1;">
+                        <div class="card-body">
+                            <h5 class="card-title">Budget Left:</h5>
+                            <span class="card-text" id="budgetLeft">100</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                
+                <div class="table-container table-responsive">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <h3 class="mb-3">Expense History</h5>
+                    </div>
+                <hr>
+                    <table id="expenseTable" class="table hover table-light table-borderless">
+                        <thead>
+                            <tr class="table-dark">
+                                <th scope="col">Expense Name</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- More rows can be added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="container align-items-center col-3">
+                <h4>Expenses by Category</h4>
+                <canvas id="myCategoryChart"></canvas>
+            </div>
+
+
+
+        </div>
+        <br>
+    </div>
+
+    <!-- Bootstrap and DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+
+
+    <script src="./js/config.js"></script>
+    <script src="./js/sharedNavBar.js"></script>
+    <script src="./js/dashboardScript.js"></script>
+    
+</body>
+
+</html>

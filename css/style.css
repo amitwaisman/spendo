@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-image: linear-gradient(120deg, #f0f6ff 0%, #dcdfdf 100%);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+   
+    
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+    
+}
+
+.btnU {
+    background-color: black; /* צבע רקע שחור */
+    color: white; /* צבע טקסט לבן */
+    border: none; /* ביטול גבול */
+    border-radius: 5px; /* פינות מעוגלות */
+    cursor: pointer; /* הופך את הסמן ליד */
+    font-size: 16px; /* גודל פונט */
+}
+
+.btnU:hover {
+    background-color: white; /* צבע רקע לבן בעת hover */
+    color: black; /* צבע טקסט שחור בעת hover */
+    border: 5px solid black; /* גבול שחור בעת hover */
+}
+
+
+
+.budget-container {
+    height: fit-content; /* יתאים את הגובה לתוכן */
+    width: 90%;
+    box-shadow: rgba(0, 0, 0, 0.35) -1px 1px 2px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 13px;
+}
+
+.add-budget-container, .add-expense-container {
+    box-shadow: rgba(0, 0, 0, 0.24)  -1px 1px 1px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.display-container {
+    box-shadow: rgba(0, 0, 0, 0.24)  -1px 1px 1px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.nav-link {
+    color: #ffffff !important;
+    margin-right: 10px;
+}
+
+.nav-link:hover {
+    color: #b42424 !important;
+}
+
+.btn-danger {
+    background-color: #b42424;
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #a31b1b;
+}
