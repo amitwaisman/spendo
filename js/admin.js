@@ -78,7 +78,7 @@ function loadUserData(users) {
         const deleteButton = `
             <button class="btn btn-danger" onclick="deleteUser('${user.User_ID}')" 
                 ${isAdminUser ? "disabled" : ""}>
-                Delete Data
+                Delete User
             </button>
         `;
 
