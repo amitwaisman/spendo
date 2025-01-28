@@ -29,25 +29,12 @@ Admin users have access to an admin panel where they can manage user data, inclu
 - **Frontend Hosting**: The frontend is hosted on an S3 bucket.
 
 ### Installation
-1. Clone the repository:
-   ```bash
-   git clone <repository_url>
-   cd spendo
-   ```
+1. Download files
 
-2. Install dependencies for the frontend (if applicable):
-   ```bash
-   npm install
-   ```
-
-3. Set up the environment:
-   - Create an `.env` file for local development.
-   - Configure AWS resources (Lambda, API Gateway, S3, DynamoDB, Cognito).
-
-4. Deploy the frontend:
+2. Deploy the frontend:
    - Upload the frontend files to the S3 bucket hosting the website.
 
-5. Deploy the backend:
+3. Deploy the backend:
    - Ensure the Lambda functions are correctly deployed and tied to the API Gateway endpoints.
 
 ---
